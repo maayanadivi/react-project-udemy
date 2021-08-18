@@ -15,13 +15,13 @@ function App() {
       id:'456',
       name: 'Bar',
       title: 'Future Security Developer',
-      avatar:'https://avatars.githubusercontent.com/u/73593736?v=4'
+      avatar:'https://avatars.githubusercontent.com/u/73611785?v=4'
     },
     {
       id:'789',
       name: 'Coral',
       title: 'Forward Metrics AnalystChange Name',
-      avatar:'https://avatars.githubusercontent.com/u/73594029?v=4'
+      avatar:'https://avatars.githubusercontent.com/u/73611785?v=4'
     }
   ])
   const [showCard , setShowCard] = useState(true)
