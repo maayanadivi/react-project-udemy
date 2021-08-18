@@ -15,13 +15,13 @@ function App() {
       id:'456',
       name: 'Bar',
       title: 'Future Security Developer',
-      avatar:'https://avatars.githubusercontent.com/u/73611785?v=4'
+      avatar:'https://avatars.githubusercontent.com/u/73593736?v=4'
     },
     {
       id:'789',
       name: 'Coral',
       title: 'Forward Metrics AnalystChange Name',
-      avatar:'https://avatars.githubusercontent.com/u/73611785?v=4'
+      avatar:'https://avatars.githubusercontent.com/u/73594029?v=4'
     }
   ])
   const [showCard , setShowCard] = useState(true)
@@ -42,6 +42,13 @@ function App() {
     setCards(cards_copy)
     
   }
+  //const buttonStyle = {
+  //  backgroundColor: null
+  //}
+  const classes = ['button']
+  if(cards.length<3) classes.push('pink');
+  if(cards.length<2) classes.push('red text');
+
 
   const cardsMarKup = showCard &&(
     cards.map((card,index)=><Card 
@@ -56,7 +63,7 @@ function App() {
   
   return (
     <div className="App">
-      <button className="button button-blue" onClick={toggleShowCard}>Show/Hide</button>
+      <button className={classes.join(' ')} onClick={toggleShowCard}>Show/Hide</button>
       {cardsMarKup} 
     </div>
   );
