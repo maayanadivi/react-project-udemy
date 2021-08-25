@@ -1,47 +1,80 @@
-import React, { useState, useEffect} from 'react';
-import './App.css';
-import Card from './Card';
-import { ThemeProvider } from 'styled-components'
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import Card from "./Card";
+import { ThemeProvider } from "styled-components";
+import axios from "axios";
 const theme = {
-  primary: '#4CAF50',
-  mango: 'yellow'
-}
+  primary: "#4CAF50",
+  mango: "yellow",
+};
 
 function App() {
- 
-  const [card, setCard] = useState([])
-  const [id, setId] = useState(1)
+  const [cards, setCards] = useState([]);
+  const [card, setCard] = useState({});
+  const [id, setId] = useState(0);
+
   useEffect(() => {
-    axios.get(`http://jsonplaceholder.typicode.com/users/${id}`)
-      .then(res=>{
-      console.log(res.data)
-      setCard(res.data)
-    })
-  }, [id])
-  
- 
+    if (id) {
+      axios
+        .get(`https://jsonplaceholder.typicode.com/users/${id}`)
+        .then((res) => {
+          setCard(res.data);
+        });
+    } else {
+      axios.get("https://jsonplaceholder.typicode.com/users").then((res) => {
+        setCards(res.data);
+      });
+    }
+  }, [id]);
+
+  const deleteCardHandler = (cardIndex) => {
+    const cards_copy = [...cards];
+    cards_copy.splice(cardIndex, 1);
+    setCards(cards_copy);
+  };
+
   const changeNameHandler = (event, id) => {
-    //1. make a copy of the cards
-    const card_copy = {...card}
-    //2. change the name of the specific card
-    card_copy.name = event.target.value
-    //3. set the cards with the latest version of card copy
-    setCard(card_copy)
-  }
-  
-  
+    //1. which card
+    const cardIndex = cards.findIndex((card) => card.id === id);
+    //2. make a copy of the cards
+    const cards_copy = [...cards];
+    //3. change the name of the specific card
+    cards_copy[cardIndex].name = event.target.value;
+    //4. set the cards with the latest version of card copy
+    setCards(cards_copy);
+  };
+
+  const cardsMarkup = cards.map((card, index) => (
+    <Card
+      name={card.name}
+      phone={card.phone}
+      key={card.id}
+      onDelete={() => deleteCardHandler(index)}
+      onChangeName={(event) => changeNameHandler(event, card.id)}
+    />
+  ));
 
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <input type="text" value={id} onChange={e=>setId(e.target.value)}/>
-        <Card
-          name={card.name}
-          phone={card.phone}
-          key={card.id}
-          onChangeName={(event) => changeNameHandler(event, card.id)}
+        <input
+          type="text"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+          style={{ marginBottom: 30, backgroundColor: theme.primary }}
         />
+
+        {id && card ? (
+          <Card
+            name={card.name}
+            phone={card.phone}
+            key={card.id}
+            onDelete={() => setCard()}
+            onChangeName={(event) => changeNameHandler(event, card.id)}
+          />
+        ) : (
+          cardsMarkup
+        )}
       </div>
     </ThemeProvider>
   );
