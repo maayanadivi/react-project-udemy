@@ -20,7 +20,8 @@
 .button {
   background-color: #4caf50;
   border: none;
-  color: white;
+  color: black;
+  font-weight: bold;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -35,7 +36,7 @@
 }
 
 .button-red {
-  background-color: #f44336;
+  background-color: #ffc6c6;
 }
 
 .text {

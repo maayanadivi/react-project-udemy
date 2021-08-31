@@ -4,14 +4,14 @@ import Card from "./Card";
 import { ThemeProvider } from "styled-components";
 import axios from "axios";
 const theme = {
-  primary: "#4CAF50",
+  primary: "#ffc6c6",
   mango: "yellow",
 };
 
 function App() {
   const [cards, setCards] = useState([]);
   const [card, setCard] = useState({});
-  const [id, setId] = useState(0);
+  const [id, setId] = useState();
 
   useEffect(() => {
     if (id) {
@@ -59,6 +59,7 @@ function App() {
       <div className="App">
         <input
           type="text"
+          placeholder="Enter ID"
           value={id}
           onChange={(e) => setId(e.target.value)}
           style={{ marginBottom: 30, backgroundColor: theme.primary }}
