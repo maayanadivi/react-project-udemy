@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: rgb(125, 127, 131);
 }
 
 .card {
@@ -7,6 +8,7 @@
   transition: 0.3s;
   width: 30%;
   margin: 0 auto 10px;
+  background-color: rgb(235, 173, 162);
 }
 
 .card:hover {
@@ -42,12 +44,4 @@
 .text {
   font-weight: bold;
   color: black;
-}
-
-.pink {
-  background-color: pink;
-}
-
-.red {
-  background-color: red;
 }
